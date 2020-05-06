@@ -6,70 +6,46 @@
   //   $(window).unload(saveSettings);
   //   loadSettings();//Name,Id,Address,PhoneNumber
 // });
-//   }
+
+
+  
+
+//let addressBook = {//   }
 ///forms for detilas to be done
-var name=document.getElementById('txt_name');
+//
+//var index=0;
+// var ContactName=document.getElementById("txt_name");
+// var id=document.getElementById("txt_id");
+// var address=document.getElementById("txt_address");
+// var phonenumber=document.getElementById("txt_phonenumber");
+
+ 
+  
+//  function AddContact()
+// {
+  
+// var Contact={ Name:ContactName.value,Id :id.value,Address:address.value,PhoneNumber:value};
+// ListofContacts.push(Contact);
+// localStorage.setItem('Contact', JSON.stringify(Contact));
+// //index++;localStorage.setItem('ListofContacts', JSON.stringify(ListofContacts));
+// }
+$(document).ready(function(){
+  onstart();
+});
+var ContactId;
+var ListofContacts=[];
+var Contactname=document.getElementById('txt_name');
 var id=document.getElementById('txt_id');
 var address=document.getElementById('txt_address');
 var phonenumber=document.getElementById('txt_phonenumber');
+function onstart()
+{
+    localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
+}
 function AddContact() 
 {
-  
-var Contact={Name:name.value,Id :id.value,Address:address.value,PhoneNumber:phonenumber.value,};
-localStorage.setItem('Contact', JSON.stringify(Contact));}
-// function loadSettings() {
-//   $('#Name').val(localStorage.Name);
-//   $('#Id').val(localStorage.Id);
-//   $('#Address').val(localStorage.Address);
-  
-//   $("#PhoneNumber").val(localStorage.PhoneNumber);
-//   saveSettings();
-// }
-
-// function saveSettings() {
-//   localStorage.Name = $('#Name').val();
-//   localStorage.Id = $('#Id').val();
-//   localStorage.Address = $('#Address').val();
-//   localStorage.PhoneNumber = $("#PhoneNumber").val();
-  
-// }
-  
-
-// function AddContact(name, email, mobile, landline, website, address) 
-//   {var inputEmail= document.getElementById("email");
-//             this.name = name;
-//             this.email = email;
-//             this.mobile = mobile;
-//             this.landline = landline;
-//             this.website = website;
-//             this.address = address;
-//             //adding this contact to a storage
-//             function Add(params)
-// {
-//   //jquery  for adding
-// }
-//         }
-//         //same forms but contact will be over ridden
-// function EditContact(name, email, mobile, landline, website, address) 
-//         {
-//             this.name = name;
-//             this.email = email;
-//             this.mobile = mobile;
-//             this.landline = landline;
-//             this.website = website;
-//             this.address = address;
-//             //adding this contact to a storage
-//             function edit(params)
-// {
-//   //jquery  for editing
-// }
-//         }
-        
-//         function DeleteContact()
-//         {
-//          // $(document).ready(function(){
-//             //     $("button").click(function(){
-//             //       $("#div1").remove();
-//             //     });
-//             //   });
-//         }
+    ListofContacts=JSON.parse(localStorage.getItem('Contacts') );  
+    var Contact={Name:Contactname.value,Id :id.value,Address:address.value,PhoneNumber:phonenumber.value,};
+    ListofContacts.push(Contact);
+    localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
+}
