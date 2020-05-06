@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>
+            AddressBook
+        </title>
+        <link rel="stylesheet" href="AddressBook.css">
+    </head>
+    <body>
+        
+       <!-- /* <input type=button onClick="parent.location='index.html'" value='Add'>*/ -->
+       <script src="AddressBook.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+     <table>
+            <tr>
+                <td>
+                    <form>
+                        <div>
+                        <label>Name</label>
+                        <input type="text" name="Name"id="txt_name">
+                        </div>  
+                        <div>
+                            <label>Id</label>
+                            <input type="text" name="Id"id="txt_id">
+                            
+                        </div> 
+                        <div>
+                            <label>Address</label>
+                            <input type="text" name="Address"id="txt_address">
+                            
+                        </div> 
+                        <div>
+                            <label>PhoneNumber</label>
+                            <input type="number" name="PhoneNumber"id="txt_phonenumber">
+                            
+                        </div> 
+                        <input type="button"onClick="parent.location='AddressBook.html'; loadSettings();" value="submit">
+                         
+
+                    </form>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+        <script src="AddressBook.js"></script>
+
+    </body>
+     </html>
+
+
