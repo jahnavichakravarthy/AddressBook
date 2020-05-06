@@ -40,7 +40,11 @@ var address=document.getElementById('txt_address');
 var phonenumber=document.getElementById('txt_phonenumber');
 function onstart()
 {
-    localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
+   if( localStorage.getItem('Contacts', JSON.stringify(ListofContacts))==undefined);
+   {
+     localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
+    alert("ContactList created Successfully");
+  }
 }
 function AddContact() 
 {
@@ -48,4 +52,39 @@ function AddContact()
     var Contact={Name:Contactname.value,Id :id.value,Address:address.value,PhoneNumber:phonenumber.value,};
     ListofContacts.push(Contact);
     localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
+}
+function getContacts()
+{
+  ListofContacts=JSON.parse(localStorage.getItem('Contacts') );
+  return ListofContacts;  
+}
+function getContact(ContactId)
+ {
+   contacts=getContacts();
+  for(var i=0;i<contacts.length;i++)
+            {
+                if(contacts[i].id == contactId)
+                {
+                    return contacts[i];
+                }
+            }
+}
+
+function Update(ContactId) 
+{
+  var Contact= getContact(ContactId);
+  Contact={Name:Contactname.value,Id :id.value,Address:address.value,PhoneNumber:phonenumber.value,};
+  ListofContacts.push(Contact);
+  localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
+}
+
+function Display(ContactId)
+{
+  var Contact= getContact(ContactId).text;
+  
+  $("#contact_name").text(contact.name);
+  $("#contact_mail").text(contact.mail);
+  $("#contact_mobile").text(contact.mobile);
+  $("#contact_landline").text(contact.landline);
+
 }
