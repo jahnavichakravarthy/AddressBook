@@ -31,7 +31,16 @@
 // }
 $(document).ready(function(){
   onstart();
+  $("#Add").click(function(){
+    $("#Contact_Display").hide();
+    $("#Form_Display").show();
+  });
+  $("#Submit").click(function(){
+    onstart();
+    
+  });
 });
+
 var ContactId;
 var ListofContacts=[];
 var Contactname=document.getElementById('txt_name');
@@ -39,19 +48,36 @@ var id=document.getElementById('txt_id');
 var address=document.getElementById('txt_address');
 var phonenumber=document.getElementById('txt_phonenumber');
 function onstart()
-{
-   if( localStorage.getItem('Contacts', JSON.stringify(ListofContacts))==undefined);
-   {
-     localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
-    alert("ContactList created Successfully");
-  }
+{ 
+$("#Contact_Display").show();
+$("#Form_Display").hide();
+  //  if(typeof localStorage.getItem('Contacts', JSON.stringify(ListofContacts))===undefined);
+  //  {
+  //    localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
+  //   alert("ContactList created Successfully");}
+ // if(){;}
+  
 }
+// function ToggleContactDisplay() {
+//   var x = document.getElementById("Contact_Display");
+//   var y=document.getElementById("Form_Display");
+//   if (x.style.display === "none") {
+//     x.style.display = "block";
+//     y.style.display = "none"
+//   } else {
+//     x.style.display = "none";
+//     y.style.display ="block";  }
+//     function ToggleFormDisplay()
+
+
+// }
 function AddContact() 
 {
-    ListofContacts=JSON.parse(localStorage.getItem('Contacts') );  
+   // ListofContacts=JSON.parse(localStorage.getItem('Contacts') );  
     var Contact={Name:Contactname.value,Id :id.value,Address:address.value,PhoneNumber:phonenumber.value,};
     ListofContacts.push(Contact);
-    localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
+   // localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
+    alert("Contact added successfully");
 }
 function getContacts()
 {
