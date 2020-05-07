@@ -6,7 +6,7 @@ $(document).ready(function(){
     $("#Form_Display").show();
   });
   $("#Submit").click(function(){
-    $("#Contact_Display").show(function(){$("left_Display").displayContacts();});
+    $("#Contact_Display").show();
     $("#Form_Display").hide();
   });
 });
@@ -55,7 +55,6 @@ function displayContacts()
 {contacts=getContacts();
   for(var i=0;i<contacts.length;i++)
             {
-              document.getElementById().innerHTML = person.name
             }
 //var contact= getContact();
 //$(contact.SelectorId).text(contact.Name);
