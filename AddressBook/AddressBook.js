@@ -8,6 +8,10 @@ $(document).ready(function(){
   $("#Submit").click(function(){
     $("#Contact_Display").show();
     $("#Form_Display").hide();
+    displayContacts();
+    $(".show_Contacts").on("click", function(){Displaydata();
+      alert("The  was clicked.");
+    });
   });
 });
 
@@ -18,7 +22,9 @@ function onstart()
 {   
 $("#Contact_Display").show();
 $("#Form_Display").hide();
-localStorage.setItem('Contacts', JSON.stringify(ListofContacts));}
+localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
+
+}
 
 
 class Contact{
@@ -52,14 +58,20 @@ function AddContact()
     //         });
 }
 function displayContacts()
-{contacts=getContacts();
-  for(var i=0;i<contacts.length;i++)
+{
+  contacts=getContacts();
+  if(contacts.length!=0)
+  {
+    $("#no_Contacts").hide();
+    for(var i=0;i<contacts.length;i++)
             {
+              $(".show_Contacts").text(contacts[i].Name);
             }
-//var contact= getContact();
-//$(contact.SelectorId).text(contact.Name);
-//console.log(contact.SelectorId);
-}
+          
+          }
+          else{("#no_Contacts").show();}
+        }
+
 function GetFormDetails(){}
 // function GenerateContactId()
 // {}
@@ -83,18 +95,29 @@ function getContact(ContactId)
 function Update(ContactId) 
 {
   var Contact= getContact(ContactId);
-  Contact={Name:Contactname.value,Id :id.value,Address:address.value,PhoneNumber:phonenumber.value,};
+  Contact.Name=$("#txt_name").val();
+  Contact.Address=$("#txt_address").val();
+  Contact.PhoneNumber=$("#txt_phonenumber").val();
+
   ListofContacts.push(Contact);
   localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
 }
+function Remove(ContactId)
 
-function Display(ContactId)
+{var Contact=getContact(ContactId);
+  var Contacts=getContacts();
+var postion=Contacts.indexOf(Contact);
+var ModifiedContacts=Contacts.splice(postion,1);
+localStorage.setItem('Contacts', JSON.stringify(ModifiedContacts));
+}
+
+function Displaydata(name)
 {
-  var Contact= getContact(ContactId).text;
+  var contact= getContact(name);
   
-  $("#contact_name").text(contact.name);
-  $("#contact_mail").text(contact.mail);
-  $("#contact_mobile").text(contact.mobile);
-  $("#contact_landline").text(contact.landline);
+  $("#contact_name").text(contact.Name);
+  $("#contact_address").text(contact.Address);
+  $("#contact_phonenumber").text(contact.PhoneNumber);
+  
 
 }
