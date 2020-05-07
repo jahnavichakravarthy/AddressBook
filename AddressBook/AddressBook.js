@@ -1,34 +1,4 @@
-//buttons and their actions
-//remove
-//
-//   function Delete() {
- // $(document).ready(function() {}
-  //   $(window).unload(saveSettings);
-  //   loadSettings();//Name,Id,Address,PhoneNumber
-// });
 
-
-  
-
-//let addressBook = {//   }
-///forms for detilas to be done
-//
-//var index=0;
-// var ContactName=document.getElementById("txt_name");
-// var id=document.getElementById("txt_id");
-// var address=document.getElementById("txt_address");
-// var phonenumber=document.getElementById("txt_phonenumber");
-
- 
-  
-//  function AddContact()
-// {
-  
-// var Contact={ Name:ContactName.value,Id :id.value,Address:address.value,PhoneNumber:value};
-// ListofContacts.push(Contact);
-// localStorage.setItem('Contact', JSON.stringify(Contact));
-// //index++;localStorage.setItem('ListofContacts', JSON.stringify(ListofContacts));
-// }
 $(document).ready(function(){
   onstart();
   $("#Add").click(function(){
@@ -36,52 +6,64 @@ $(document).ready(function(){
     $("#Form_Display").show();
   });
   $("#Submit").click(function(){
-    $("#Contact_Display").show();
+    $("#Contact_Display").show(function(){$("left_Display").displayContacts();});
     $("#Form_Display").hide();
-
   });
 });
 
-var ContactId;
+//var ContactId;
 var ListofContacts=[];
 
 function onstart()
 {   
 $("#Contact_Display").show();
 $("#Form_Display").hide();
-localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
-  //  if(typeof localStorage.getItem('Contacts', JSON.stringify(ListofContacts))===undefined);
-  //  {
-  //    localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
-  //   alert("ContactList created Successfully");}
- // if(){;}
-  
+localStorage.setItem('Contacts', JSON.stringify(ListofContacts));}
+
+
+class Contact{
+  constructor(name,id,address,phoneNumber,selectorId)
+  {
+    this.Name=name;
+    this.SelectorId=selectorId;
+    this.Id=id;
+    this.Address=address;
+    this.PhoneNumber=phoneNumber;
+  }
 }
-// function ToggleContactDisplay() {
-//   var x = document.getElementById("Contact_Display");
-//   var y=document.getElementById("Form_Display");
-//   if (x.style.display === "none") {
-//     x.style.display = "block";
-//     y.style.display = "none"
-//   } else {
-//     x.style.display = "none";
-//     y.style.display ="block";  }
-//     function ToggleFormDisplay()
-
-
 // }
 function AddContact() 
 {
+  ListofContacts=getContacts();
   var Contactname=document.getElementById('txt_name');
-  var id=document.getElementById('txt_id');
+  var id="contact"+(ListofContacts.length+1);
+  var selectorId="#"+id;
   var address=document.getElementById('txt_address');
-  var phonenumber=document.getElementById('txt_phonenumber');
-    ListofContacts=JSON.parse(localStorage.getItem('Contacts') );  
-    var Contact={Name:Contactname.value,Id :id.value,Address:address.value,PhoneNumber:phonenumber.value,};
-    ListofContacts.push(Contact);
+  var phonenumber=document.getElementById('txt_phonenumber');    
+    var NewContact=new Contact(Contactname.value,id,address.value,phonenumber.value,selectorId);
+    console.log(NewContact);
+    ListofContacts.push(NewContact);
     localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
     alert("Contact added successfully");
+     
+        //  displayContact(NewContact.Id);
+            // $(NewContact.selectorId).on('click',function(){ 
+    //             //displayContactdetails(NewContact.Id);
+    //         });
 }
+function displayContacts()
+{contacts=getContacts();
+  for(var i=0;i<contacts.length;i++)
+            {
+              document.getElementById().innerHTML = person.name
+            }
+//var contact= getContact();
+//$(contact.SelectorId).text(contact.Name);
+//console.log(contact.SelectorId);
+}
+function GetFormDetails(){}
+// function GenerateContactId()
+// {}
 function getContacts()
 {
   ListofContacts=JSON.parse(localStorage.getItem('Contacts') );
@@ -92,7 +74,7 @@ function getContact(ContactId)
    contacts=getContacts();
   for(var i=0;i<contacts.length;i++)
             {
-                if(contacts[i].id == contactId)
+                if(contacts[i].Id == ContactId)
                 {
                     return contacts[i];
                 }
