@@ -15,7 +15,7 @@ $(document).ready(function(){
   });
 });
 
-//var ContactId;
+var ContactId;
 var ListofContacts=[];
 
 function onstart()
@@ -59,13 +59,20 @@ function AddContact()
 }
 function displayContacts()
 {
-  contacts=getContacts();
+  var contacts=getContacts();
   if(contacts.length!=0)
   {
     $("#no_Contacts").hide();
     for(var i=0;i<contacts.length;i++)
-            {
-              $(".show_Contacts").text(contacts[i].Name);
+            { var display="<div id=\""+contacts[i].Name+"\"";
+            display+="class=\"contact_list\">";
+            display+="<h2>"+contacts[i].Name+"</h2></div>";
+               $(".show_Contacts").html(display);
+            // $("contacts[i].SelectorId").text(contacts[i].Name);
+             $("contacts[i].SelectorId").on("click", function(){
+              // ContactId=contacts[i].Id;
+              Displaydata(contacts[i]);
+            });
             }
           
           }
@@ -80,12 +87,12 @@ function getContacts()
   ListofContacts=JSON.parse(localStorage.getItem('Contacts') );
   return ListofContacts;  
 }
-function getContact(ContactId)
+function getContact(id)
  {
    contacts=getContacts();
   for(var i=0;i<contacts.length;i++)
             {
-                if(contacts[i].Id == ContactId)
+                if(contacts[i].Id  == id)
                 {
                     return contacts[i];
                 }
@@ -111,10 +118,9 @@ var ModifiedContacts=Contacts.splice(postion,1);
 localStorage.setItem('Contacts', JSON.stringify(ModifiedContacts));
 }
 
-function Displaydata(name)
+function Displaydata(contact)
 {
-  var contact= getContact(name);
-  
+   
   $("#contact_name").text(contact.Name);
   $("#contact_address").text(contact.Address);
   $("#contact_phonenumber").text(contact.PhoneNumber);
