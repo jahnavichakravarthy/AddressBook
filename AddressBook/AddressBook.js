@@ -2,7 +2,7 @@
 $(document).ready(function()
 {
   OnStart();
-  $("#add").click(function()
+  $("#Add").click(function()
     {
       $("#contact_display").hide();
       $("#form_display").show();
@@ -28,18 +28,28 @@ function OnStart()
 }
 
 
-class Contact{
+// class Contact{
   
-  constructor(name,id,address,phoneNumber,selectorId)
-  {
-    this.Name=name;
-    this.SelectorId=selectorId;
-    this.Id=id;
-    this.Address=address;
-    this.PhoneNumber=phoneNumber;
-   }
+//   constructor(name,id,address,phoneNumber,selectorId)
+//   {
+//     this.Name=name;
+//     this.SelectorId=selectorId;
+//     this.Id=id;
+//     this.Address=address;
+//     this.PhoneNumber=phoneNumber;
+//    }
       
+// }
+class Contact {
+  constructor(name, id, address, phoneNumber, selectorId) {
+    this.Name = name;
+    this.SelectorId = selectorId;
+    this.Id = id;
+    this.Address = address;
+    this.PhoneNumber = phoneNumber;
+  }
 }
+
 
 var SelectedContactId;
 function AddContact() 
@@ -50,12 +60,14 @@ function AddContact()
   var selectorId="#"+id;
   var address=document.getElementById('txt_address');
   var phoneNumber=document.getElementById('txt_phonenumber');    
-   Contact=new Contact(contactName.value,id,address.value,phoneNumber.value,selectorId);
-   console.log(Contact);
-   ListofContacts.push(Contact);
+  var Createdcontact=new Contact(contactName.value,id,address.value,phoneNumber.value,selectorId);
+   console.log(Createdcontact);
+     ListofContacts.push(Createdcontact);
    localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
    alert("Contact added successfully");
-   
+   //Contact={};console.log(Contact);
+
+
 }
 function DisplayContacts()
 {
@@ -67,7 +79,7 @@ function DisplayContacts()
       for(var i=0;i<contacts.length;i++)
          {               
           var display="<div id=\""+contacts[i].Id+"\"";
-          display+="onclick=\""+DisplayData(contacts[i].Id);Assignment(contacts[i].Id);+"\"";
+          display+="onclick=\"DisplayData(id);\"";
           display+="class=\"contact_list\">";
           display+="<h2>"+contacts[i].Name+"</h2></div>";
           $(".show_contacts").append(display);
@@ -79,6 +91,7 @@ function DisplayContacts()
     }
 }
 
+//Assignment(contacts[i].Id);
 function Assignment(id)
 {
   SelectedContactId=id;
