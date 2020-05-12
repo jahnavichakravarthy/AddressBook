@@ -7,6 +7,8 @@ $(document).ready(function()
       $("#contact_display").hide();
       $("#form_display").show();
       $("#update_form").hide();
+      $("#submit").show();
+
     });
   $("#submit").click(function()
     {
