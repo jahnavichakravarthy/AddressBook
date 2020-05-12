@@ -6,7 +6,7 @@
      </title>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link rel="stylesheet" href="AddressBook.css">
-      </script> -->
+      </script> 
   </head>
   <body>
     <script src="AddressBook.js"></script>
@@ -15,15 +15,15 @@
                <h3 id="display_contacts">CONTACTS</h3>
                <h2 id="no_contacts">No contacts yet!!!!!</h2>
                <div class="show_contacts"></div>>
-               <input type=button id="Add"  value='Add'>
+               <input type=button id="add" value='Add'>
            </div>
           <div class="column" style="background-color:#bbb;">
               <div class="contact_details">
-                <h2 id="contact_name"></h2>
-                <h2 id="contact_address"></h2>
-                <h2 id="contact_phonenumber"></h2>
+                <b>Name:</b><p id="contact_name"></p>
+                <b>Address:</b><p id="contact_address"></p>
+                <b>PhoneNumber:</b><p id="contact_phonenumber"></p2>
                 <input type="button"Id="update"onclick="UpdateFormDisplay();" value="UpdateContact">
-                <input type="button"Id="delete"onclick="Remove();" value="Submit">
+                <input type="button"Id="delete"onclick="ConfirmRemove();" value="Delete">
               </div>
             </div>
       </div>
@@ -48,7 +48,7 @@
                        </div> 
 
                        <input type="button"Id="submit"onclick="AddContact();" value="submit">
-                      <input type="button"Id="update_Form"onclick="Update();" value="Update">
+                      <input type="button"Id="update_form"onclick="Update();" value="Update">
                  
                   </form>
 
