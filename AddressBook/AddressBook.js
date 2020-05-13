@@ -1,104 +1,116 @@
 
 $(document).ready(function()
 {
-  OnStart();
+  onStart();
   $("#add").click(function()
     {
-      $("#contact_display").hide();
-      $("#form_display").show();
-      $("#update_form").hide();
+      $("#home-page").hide();
+      $("#form-display").show();
+      $("#update-form").hide();
       $("#submit").show();
+      $("#back").show();
+      $(".contact-details").hide();  
+      
+
 
     });
   $("#submit").click(function()
     {
-     Mainpage();
+     mainPage();
     });
-    $("#update_form").click(function()
+    $("#update-form").click(function()
     {
-     Mainpage();
+     mainPage();
     });
 
 });
 
 
-var ListofContacts=[];
 
-function OnStart()
+
+function onStart()
 { 
-  $(".contact_details").hide();  
-  $("#contact_display").show();
-  $("#form_display").hide();
-  localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
+  var listOfContacts=[];
+  $(".contact-details").hide();  
+  $("#home-page").show();
+  $("#form-display").hide();
+  localStorage.setItem('Contacts', JSON.stringify(listOfContacts));
 }
 
 class Contact {
-  constructor(name, id, address, phoneNumber, selectorId) {
+  constructor(name, id, address, phoneNumber) {
     this.Name = name;
-    this.SelectorId = selectorId;
-    this.Id = id;
+     this.Id = id;
     this.Address = address;
     this.PhoneNumber = phoneNumber;
   }
 }
-function Mainpage() {
-  $("#contact_display").show();
-  $("#form_display").hide();
-  DisplayContacts();
+function mainPage() {
+  $("#home-page").show();
+  $("#form-display").hide();
+  displayContacts();
 }
 
-var SelectedContactId;
-function AddContact() 
+var selectedContactId;
+function addContact() 
 {
-  ListofContacts=GetContacts();
-  var contactName=document.getElementById('txt_name');
-  var id="contact"+(ListofContacts.length+1);
-  var selectorId="#"+id;
-  var address=document.getElementById('txt_address');
-  var phoneNumber=document.getElementById('txt_phonenumber');    
-  var Createdcontact=new Contact(contactName.value,id,address.value,phoneNumber.value,selectorId);
-   console.log(Createdcontact);
-     ListofContacts.push(Createdcontact);
-   localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
+  listOfContacts=getContacts();
+  var contactName=document.getElementById('txt-name');
+  var id="contact"+(listOfContacts.length+1);
+  var address=document.getElementById('txt-address');
+  var phoneNumber=document.getElementById('txt-phonenumber');    
+  var createdContact=new Contact(contactName.value,id,address.value,phoneNumber.value);
+   console.log(createdContact);
+     listOfContacts.push(createdContact);
+   localStorage.setItem('Contacts', JSON.stringify(listOfContacts));
+   reset();
    alert("Contact added successfully");
    //Contact={};console.log(Contact);
+   
 
 
 }
-function DisplayContacts()
+
+function reset()
 {
-  var contacts=GetContacts();
+document.getElementById("txt-name").value = "";
+document.getElementById("txt-address").value = "";
+document.getElementById("txt-phonenumber").value = "";
+}
+function displayContacts()
+{
+  var contacts=getContacts();
   if(contacts.length!=0)
     {
-      $(".show_contacts").empty();
-      $("#no_contacts").hide();
+      $(".show-contacts").empty();
+      $("#no-contacts").hide();
       for(var i=0;i<contacts.length;i++)
          {               
           var display="<div id=\""+contacts[i].Id+"\"";
-          display+="onclick=\"DisplayData(id);\"";
-          display+="class=\"contact_list\">";
+          display+="onclick=\"displayData(id);\"";
+          display+="class=\"contact-list\">";
           display+="<h2>"+contacts[i].Name+"</h2></div>";
-          $(".show_contacts").append(display);
+          $(".show-contacts").append(display);
         }
     }
   else
     {
-      $("#no_contacts").show();
-      $(".show_contacts").hide();
-      $(".contact_details").hide();
+      $("#no-contacts").show();
+      $(".show-contacts").hide();
+      $(".contact-details").hide();
     }
 }
 
 //Assignment(contacts[i].Id);
 
-function GetContacts()
+function getContacts()
 {
-  ListofContacts=JSON.parse(localStorage.getItem('Contacts') );
-  return ListofContacts;  
+  listOfContacts=JSON.parse(localStorage.getItem('Contacts') );
+  return listOfContacts;  
 }
-function GetContact(id)
+function getContact(id)
  {
-   contacts=GetContacts();
+   contacts=getContacts();
   for(var i=0;i<contacts.length;i++)
    {
       if(contacts[i].Id  == id)
@@ -108,59 +120,59 @@ function GetContact(id)
    }
 }
 
-function Update() 
+function update() 
 {
-  var SelectedContact= GetContact(SelectedContactId);
-  SelectedContact.Name=$("#txt_name").val();
-  SelectedContact.Address=$("#txt_address").val();
-  SelectedContact.PhoneNumber=$("#txt_phonenumber").val();
+  var selectedContact= getContact(selectedContactId);
+  //document.getElementById("txt_name").innerHTML=SelectedContact.Name;
+  selectedContact.Name=$("#txt-name").val();
+  selectedContact.Address=$("#txt-address").val();
+  selectedContact.PhoneNumber=$("#txt-phonenumber").val();
   //ListofContacts.push(SelectedContact);
-  localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
+  localStorage.setItem('Contacts', JSON.stringify(listOfContacts));
   alert("Contact UPDATED successfully!!!!!!!");
-  Mainpage();
+  mainPage();
+  $(".contact-details").hide(); 
+
 
 }
-function Remove()
+function remove()
 {
- SelectedContact=GetContact(SelectedContactId);
- //var Contacts=GetContacts();
-ListofContacts.pop(SelectedContact)
-//  var postion=Contacts.indexOf(SelectedContact);
-//  var ModifiedContacts=Contacts.splice(postion,1);
- localStorage.setItem('Contacts', JSON.stringify(ListofContacts));
+ selectedContact=getContact(selectedContactId);  
+ listOfContacts=getContacts();
+ listOfContacts.pop(selectedContact)
+ localStorage.setItem('Contacts', JSON.stringify(listOfContacts));
  alert("Contact Deleted successfully!!!!!!!");
- DisplayContacts();
+ displayContacts();
  
 }
-function DisplayData(id)
+function displayData(id)
 { 
-  SelectedContactId=id;
-  $(".contact_details").show();
+  selectedContactId=id;
+  $(".contact-details").show();
   //Contact=new Contact();
-  SelectedContact=GetContact(id);   
-  $("#contact_name").text(SelectedContact.Name);
-  $("#contact_address").text(SelectedContact.Address);
-  $("#contact_phonenumber").text(SelectedContact.PhoneNumber);
+  selectedContact=getContact(id);   
+  $("#contact-name").text(selectedContact.Name);
+  $("#contact-address").text(selectedContact.Address);
+  $("#contact-phonenumber").text(selectedContact.PhoneNumber);
 }
-function UpdateFormDisplay() {
-  $("#contact_display").hide();
-  $("#form_display").show();  
+function updateFormDisplay() {
+  $("#home-page").hide();
+  $("#form-display").show();
+  $("#back").show();  
   $("#submit").hide();
-   $("#update_form").show();
+   $("#update-form").show();
   
 }
-function ConfirmRemove() {
+function confirmRemove() {
   if (confirm("Are you sure you want to delete????"))
   {
-    Remove();
+    remove();
 
   }
   else
   {
     alert("******No changes made*****");
-    // $("#contact_display").show();
-    //   $("#form_display").hide();
-    //   DisplayContacts();
+    
   }
   
 }

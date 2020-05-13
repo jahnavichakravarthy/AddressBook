@@ -10,45 +10,47 @@
   </head>
   <body>
     <script src="AddressBook.js"></script>
-      <div id="contact_display">
+      <div id="home-page">
           <div class="column" style="background-color:#aaa;">
-               <h3 id="display_contacts">CONTACTS</h3>
-               <h2 id="no_contacts">No contacts yet!!!!!</h2>
-               <div class="show_contacts"></div>>
-               <input type=button id="add" value='Add'>
+               <h3>CONTACTS</h3>
+               <h2 id="no-contacts">No contacts yet!!!!!</h2>
+               <div class="show-contacts"></div>
+               <button type=button class="button"id="add" >Add</button>
+                 
            </div>
           <div class="column" style="background-color:#bbb;">
-              <div class="contact_details">
-                <b>Name:</b><p id="contact_name"></p>
-                <b>Address:</b><p id="contact_address"></p>
-                <b>PhoneNumber:</b><p id="contact_phonenumber"></p>
-                <input type="button"Id="update"onclick="UpdateFormDisplay();" value="UpdateContact">
-                <input type="button"Id="delete"onclick="ConfirmRemove();" value="Delete">
+              <div class="contact-details">
+                <b>Name:</b><p id="contact-name"></p>
+                <b>Address:</b><p id="contact-address"></p>
+                <b>PhoneNumber:</b><p id="contact-phonenumber"></p>
+                <button type="button"id="update" class="button"onclick="updateFormDisplay();" >Update</button>
+                <button type="button"id="delete"class="button"onclick="confirmRemove();" >Delete</button>
               </div>
             </div>
       </div>
-  <div id="form_display">
+  <div id="form-display">
     <table>
         <tr>
             <td>
                 <form>
                         <div>
                           <label>Name</label>
-                          <input type="text" name="Name"id="txt_name">
+                          <input type="text" name="Name"id="txt-name">
                         </div>
 
                        <div>
                           <label>Address</label>
-                          <input type="text" name="Address"id="txt_address">
+                          <input type="text" name="Address"id="txt-address">
                        </div>
 
                        <div>
                           <label>PhoneNumber</label>
-                          <input type="number" name="PhoneNumber"id="txt_phonenumber">
+                          <input type="number" name="PhoneNumber"id="txt-phonenumber">
                        </div> 
 
-                       <input type="button"Id="submit"onclick="AddContact();" value="submit">
-                      <input type="button"Id="update_form"onclick="Update();" value="Update">
+                       <button type="button"id="submit"class="button"onclick="addContact();" value="submit">submit</button>
+                        <button type="button" id="back"class="button"onclick="mainPage();">back</button>
+                      <button type="button"id="update-form"class="button"onclick="update();">Update Contact</button>
                  
                   </form>
 
