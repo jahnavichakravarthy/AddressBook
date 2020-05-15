@@ -7,12 +7,11 @@ $(document).ready(function()
       $("#home-page").hide();
       $("#form-display").show();
       $("#update-form").hide();
-      $("#submit").show();
-      $("#back").show();
+       $("#back").show();
+       $("#submit").show();
       $(".contact-details").hide();  
-      
-
-
+     // validateForm();
+     
     });
   $("#submit").click(function()
     {
@@ -30,7 +29,7 @@ $(document).ready(function()
 
 function onStart()
 { 
-  var listOfContacts=[];
+  var listOfContacts=[];//is required for intialaztion
   $(".contact-details").hide();  
   $("#home-page").show();
   $("#form-display").hide();
@@ -58,24 +57,35 @@ function addContact()
   var contactName=document.getElementById('txt-name');
   var id="contact"+(listOfContacts.length+1);
   var address=document.getElementById('txt-address');
-  var phoneNumber=document.getElementById('txt-phonenumber');    
+  var phoneNumber=document.getElementById('txt-phonenumber'); 
+  //var validity=validateForm(contactName);   
   var createdContact=new Contact(contactName.value,id,address.value,phoneNumber.value);
-   console.log(createdContact);
-     listOfContacts.push(createdContact);
-   localStorage.setItem('Contacts', JSON.stringify(listOfContacts));
-   reset();
-   alert("Contact added successfully");
-   //Contact={};console.log(Contact);
-   
+  console.log(createdContact);
+  listOfContacts.push(createdContact);
+  localStorage.setItem('Contacts', JSON.stringify(listOfContacts));
+  reset();
+  alert("Contact added successfully");
+  
+}
+function setUpadteFormValues(selectedContactId)
+{
+  selectedContact=getContact(selectedContactId);
+  getElement("txt-name",selectedContact.Name);
+  getElement("txt-address",selectedContact.Address);
+  getElement("txt-phonenumber",selectedContact.PhoneNumber);
 
-
+  
 }
 
+function getElement(idSelector,value) {
+  document.getElementById(idSelector).value=value;
+  
+}
 function reset()
 {
-document.getElementById("txt-name").value = "";
-document.getElementById("txt-address").value = "";
-document.getElementById("txt-phonenumber").value = "";
+  getElement("txt-name","");
+  getElement("txt-address","");
+  getElement("txt-phonenumber","");
 }
 function displayContacts()
 {
@@ -101,7 +111,6 @@ function displayContacts()
     }
 }
 
-//Assignment(contacts[i].Id);
 
 function getContacts()
 {
@@ -109,7 +118,7 @@ function getContacts()
   return listOfContacts;  
 }
 function getContact(id)
- {
+{
    contacts=getContacts();
   for(var i=0;i<contacts.length;i++)
    {
@@ -123,11 +132,10 @@ function getContact(id)
 function update() 
 {
   var selectedContact= getContact(selectedContactId);
-  //document.getElementById("txt_name").innerHTML=SelectedContact.Name;
+  
   selectedContact.Name=$("#txt-name").val();
   selectedContact.Address=$("#txt-address").val();
   selectedContact.PhoneNumber=$("#txt-phonenumber").val();
-  //ListofContacts.push(SelectedContact);
   localStorage.setItem('Contacts', JSON.stringify(listOfContacts));
   alert("Contact UPDATED successfully!!!!!!!");
   mainPage();
@@ -155,12 +163,14 @@ function displayData(id)
   $("#contact-address").text(selectedContact.Address);
   $("#contact-phonenumber").text(selectedContact.PhoneNumber);
 }
-function updateFormDisplay() {
+function updateFormDisplay() 
+{
   $("#home-page").hide();
   $("#form-display").show();
   $("#back").show();  
   $("#submit").hide();
    $("#update-form").show();
+   setUpadteFormValues(selectedContactId);
   
 }
 function confirmRemove() {
@@ -176,5 +186,28 @@ function confirmRemove() {
   }
   
 }
+//**************required for empty form ************
 
+
+// function validateForm() 
+// {
+//   var x = document.forms["myForm"]["Name"].value;
+//   if (x == "") {
+//     alert("Name must be filled out");
+//     return false;
+//   }
+  // name=$("#txt-name").val();
+  // if(name.length==undefined)
+  // {
+  //  $("#txt-name").after('<p class="validations">Please fill the field</p>');
+    
+  // }
+  // else{
+    
+  //   $("#submit").show();
+  //}
+    
+//*****************to be done
+  
+//}
 
